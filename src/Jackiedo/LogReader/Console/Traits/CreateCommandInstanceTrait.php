@@ -16,7 +16,6 @@ trait CreateCommandInstanceTrait
     /**
      * Create a new command instance.
      *
-     * @param \Jackiedo\LogReader\LogReader $reader
      *
      * @return void
      */

@@ -2,7 +2,7 @@
 
 namespace Jackiedo\LogReader\Entities;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Support\Collection;
 use Jackiedo\LogReader\Contracts\LogParser;
@@ -10,7 +10,6 @@ use Jackiedo\LogReader\Contracts\LogParser;
 /**
  * The LogEntry class.
  *
- * @package Jackiedo\LogReader
  *
  * @author Jackie Do <anhvudo@gmail.com>
  * @copyright 2017
@@ -92,16 +91,15 @@ class LogEntry
     /**
      * Constructs a new entry object with the specified attributes.
      *
-     * @param object $parser
-     * @param object $cache
-     * @param array  $attributes
-     *
+     * @param  object  $parser
+     * @param  object  $cache
+     * @param  array  $attributes
      * @return void
      */
     public function __construct(LogParser $parser, Cache $cache, $attributes = [])
     {
         $this->parser = $parser;
-        $this->cache  = $cache;
+        $this->cache = $cache;
 
         $this->setAttributes($attributes);
         $this->assignAttributes();
@@ -110,8 +108,7 @@ class LogEntry
     /**
      * Magic accessor.
      *
-     * @param string $property
-     *
+     * @param  string  $property
      * @return mixed
      */
     public function __get($property)
@@ -122,7 +119,6 @@ class LogEntry
     /**
      * Retrieves an attribute of the log entry.
      *
-     * @param $key
      *
      * @return mixed
      */
@@ -136,8 +132,7 @@ class LogEntry
     /**
      * Get original value of an property of the log entry.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return void
      */
     public function getOriginal($key)
@@ -193,7 +188,7 @@ class LogEntry
     public function delete()
     {
         $rawContent = $this->getRawContent();
-        $filePath   = $this->attributes['file_path'];
+        $filePath = $this->attributes['file_path'];
         $logContent = file_get_contents($filePath);
         $logContent = str_replace($rawContent, '', $logContent);
 
@@ -209,7 +204,7 @@ class LogEntry
      */
     public function getRawContent()
     {
-        return $this->attributes['header'] . ' ' . $this->attributes['body'];
+        return $this->attributes['header'].' '.$this->attributes['body'];
     }
 
     /**
@@ -231,13 +226,12 @@ class LogEntry
      */
     protected function makeCacheKey()
     {
-        return 'log' . $this->id;
+        return 'log'.$this->id;
     }
 
     /**
      * Sets the log entry's ID property.
      *
-     * @param $id
      *
      * @return void
      */
@@ -249,8 +243,7 @@ class LogEntry
     /**
      * Sets the log entry's date property.
      *
-     * @param string $date
-     *
+     * @param  string  $date
      * @return void
      */
     protected function setDate($date = null)
@@ -263,8 +256,7 @@ class LogEntry
     /**
      * Sets the log entry's environment property.
      *
-     * @param string $environment
-     *
+     * @param  string  $environment
      * @return void
      */
     protected function setEnvironment($environment = null)
@@ -277,8 +269,7 @@ class LogEntry
     /**
      * Sets the log entry's level property.
      *
-     * @param string $level
-     *
+     * @param  string  $level
      * @return void
      */
     protected function setLevel($level = null)
@@ -291,8 +282,7 @@ class LogEntry
     /**
      * Sets the log entry's file_path property.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return void
      */
     protected function setFilePath($path = null)
@@ -305,8 +295,7 @@ class LogEntry
     /**
      * Sets the log entry's context property.
      *
-     * @param string $context
-     *
+     * @param  string  $context
      * @return void
      */
     protected function setContext($context = null)
@@ -317,7 +306,6 @@ class LogEntry
     /**
      * Sets the log entry's level property.
      *
-     * @param $stackTraces
      *
      * @return void
      */
@@ -337,8 +325,7 @@ class LogEntry
     /**
      * Sets the attributes property.
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return void
      */
     protected function setAttributes($attributes = [])
@@ -356,8 +343,8 @@ class LogEntry
      */
     protected function assignAttributes()
     {
-        $bodyParsed                       = $this->parser->parseLogBody($this->attributes['body']);
-        $this->attributes['context']      = $bodyParsed['context'];
+        $bodyParsed = $this->parser->parseLogBody($this->attributes['body']);
+        $this->attributes['context'] = $bodyParsed['context'];
         $this->attributes['stack_traces'] = $bodyParsed['stack_traces'];
 
         $this->setId($this->generateId());
@@ -372,22 +359,21 @@ class LogEntry
     /**
      * Convert the property strings to be compatible with older version.
      *
-     * @param string $property
-     *
+     * @param  string  $property
      * @return string
      */
     protected function reFormatForCompatibility($property)
     {
         switch (true) {
-            case 'header' == $property:
+            case $property == 'header':
                 $property = 'context';
                 break;
 
-            case 'stack' == $property:
+            case $property == 'stack':
                 $property = 'stack_traces';
                 break;
 
-            case 'filePath' == $property:
+            case $property == 'filePath':
                 $property = 'file_path';
                 break;
 

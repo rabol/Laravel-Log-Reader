@@ -7,7 +7,6 @@ use Jackiedo\LogReader\Contracts\LogParser;
 /**
  * The TraceEntry class.
  *
- * @package Jackiedo\LogReader
  *
  * @author Jackie Do <anhvudo@gmail.com>
  * @copyright 2017
@@ -52,14 +51,13 @@ class TraceEntry
     /**
      * Create instance of trace entry.
      *
-     * @param object $parser
-     * @param string $content
-     *
+     * @param  object  $parser
+     * @param  string  $content
      * @return void
      */
     public function __construct(LogParser $parser, $content)
     {
-        $this->parser  = $parser;
+        $this->parser = $parser;
         $this->content = $content;
 
         $this->assignAttributes();

@@ -7,7 +7,6 @@ use Jackiedo\LogReader\Contracts\LogParser;
 /**
  * The LogContext class.
  *
- * @package Jackiedo\LogReader
  *
  * @author Jackie Do <anhvudo@gmail.com>
  * @copyright 2017
@@ -59,14 +58,13 @@ class LogContext
     /**
      * Create instance of log context.
      *
-     * @param object $parser
-     * @param string $content
-     *
+     * @param  object  $parser
+     * @param  string  $content
      * @return void
      */
     public function __construct(LogParser $parser, $content)
     {
-        $this->parser  = $parser;
+        $this->parser = $parser;
         $this->content = $content;
 
         $this->assignAttributes();

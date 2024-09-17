@@ -33,17 +33,17 @@ class LogReaderFileListCommand extends Command
     {
         $logPath = $this->option('log-path');
 
-        if (!empty($logPath)) {
+        if (! empty($logPath)) {
             $this->reader->setLogPath($logPath);
         }
 
-        $fileList  = $this->reader->getLogFilenameList($this->option('file-name'));
+        $fileList = $this->reader->getLogFilenameList($this->option('file-name'));
         $totalFile = count($fileList);
 
-        $this->line('You have total ' . $totalFile . ' log ' . (($totalFile > 1) ? 'files' : 'file') . ":\r\n");
+        $this->line('You have total '.$totalFile.' log '.(($totalFile > 1) ? 'files' : 'file').":\r\n");
 
         $headers = ['File name', 'Path'];
-        $output  = [];
+        $output = [];
 
         foreach ($fileList as $fileName => $filePath) {
             $output[] = [

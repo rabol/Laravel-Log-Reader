@@ -45,25 +45,25 @@ class LogReaderDetailCommand extends Command
             $this->line($rawContent);
         } else {
             $this->line("You are viewing detail of the log entry as follow:\r\n");
-            $this->line('>>> Entry ID: ' . $logEntry->id);
-            $this->line('[-] In file: ' . $logEntry->file_path);
-            $this->line('[-] Date: ' . $logEntry->date);
-            $this->line('[-] Environment: ' . $logEntry->environment);
-            $this->line('[-] Level: ' . $logEntry->level . "\r\n");
+            $this->line('>>> Entry ID: '.$logEntry->id);
+            $this->line('[-] In file: '.$logEntry->file_path);
+            $this->line('[-] Date: '.$logEntry->date);
+            $this->line('[-] Environment: '.$logEntry->environment);
+            $this->line('[-] Level: '.$logEntry->level."\r\n");
 
             $this->line('>>> Message:');
-            $this->line($logEntry->context->message . "\r\n");
+            $this->line($logEntry->context->message."\r\n");
 
             $this->line('>>> Context informations:');
-            $this->line('[-] Exception: ' . $logEntry->context->exception);
-            $this->line('[-] Caught in: ' . $logEntry->context->in . ((!empty($logEntry->context->line)) ? ' (line ' . $logEntry->context->line . ')' : null) . "\r\n");
+            $this->line('[-] Exception: '.$logEntry->context->exception);
+            $this->line('[-] Caught in: '.$logEntry->context->in.((! empty($logEntry->context->line)) ? ' (line '.$logEntry->context->line.')' : null)."\r\n");
 
             $this->line('>>> Stack trace informations:');
 
             foreach ($logEntry->stack_traces as $key => $trace) {
-                $this->line(($key+1) . '. ---');
-                $this->line('Caught at: ' . $trace->caught_at);
-                $this->line('Caught in: ' . $trace->in . ((!empty($trace->line)) ? ' (line ' . $trace->line . ')' : null) . "\r\n");
+                $this->line(($key + 1).'. ---');
+                $this->line('Caught at: '.$trace->caught_at);
+                $this->line('Caught in: '.$trace->in.((! empty($trace->line)) ? ' (line '.$trace->line.')' : null)."\r\n");
             }
         }
     }

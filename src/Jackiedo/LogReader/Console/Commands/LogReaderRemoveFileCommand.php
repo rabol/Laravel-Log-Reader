@@ -37,7 +37,7 @@ class LogReaderRemoveFileCommand extends Command
 
         $removed = $this->reader->removeLogFile();
 
-        $this->info('You deleted ' . $removed . ' log ' . (($removed > 1) ? 'files' : 'file') . ' successfully.');
+        $this->info('You deleted '.$removed.' log '.(($removed > 1) ? 'files' : 'file').' successfully.');
     }
 
     /**

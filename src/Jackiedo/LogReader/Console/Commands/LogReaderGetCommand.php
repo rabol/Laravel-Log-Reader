@@ -39,18 +39,18 @@ class LogReaderGetCommand extends Command
 
         foreach ($logs as $logEntry) {
             $this->line('----------------------------------------------');
-            $this->line('>>> Entry ID: ' . $logEntry->id);
-            $this->line('[-] In file: ' . $logEntry->file_path);
-            $this->line('[-] Date: ' . $logEntry->date);
-            $this->line('[-] Environment: ' . $logEntry->environment);
-            $this->line('[-] Level: ' . $logEntry->level . "\r\n");
+            $this->line('>>> Entry ID: '.$logEntry->id);
+            $this->line('[-] In file: '.$logEntry->file_path);
+            $this->line('[-] Date: '.$logEntry->date);
+            $this->line('[-] Environment: '.$logEntry->environment);
+            $this->line('[-] Level: '.$logEntry->level."\r\n");
 
             $this->line('>>> Message:');
-            $this->line($logEntry->context->message . "\r\n");
+            $this->line($logEntry->context->message."\r\n");
 
             $this->line('>>> More informations:');
-            $this->line('[-] Exception: ' . $logEntry->context->exception);
-            $this->line('[-] Caught in: ' . $logEntry->context->in . ((!empty($logEntry->context->line)) ? ' (line ' . $logEntry->context->line . ')' : null) . "\r\n");
+            $this->line('[-] Exception: '.$logEntry->context->exception);
+            $this->line('[-] Caught in: '.$logEntry->context->in.((! empty($logEntry->context->line)) ? ' (line '.$logEntry->context->line.')' : null)."\r\n");
         }
     }
 
@@ -62,16 +62,16 @@ class LogReaderGetCommand extends Command
     protected function getLogEntries()
     {
         if ($this->option('paginate')) {
-            $logs  = $this->reader->paginate($this->option('per-page'), $this->option('page'));
+            $logs = $this->reader->paginate($this->option('per-page'), $this->option('page'));
             $total = $logs->total();
 
-            $this->line('You have total ' . $total . ' log ' . (($total > 1) ? 'entries' : 'entry') . '.');
-            $this->line('You are viewing page ' . $logs->currentPage() . '/' . $logs->lastPage() . " as follow:\r\n");
+            $this->line('You have total '.$total.' log '.(($total > 1) ? 'entries' : 'entry').'.');
+            $this->line('You are viewing page '.$logs->currentPage().'/'.$logs->lastPage()." as follow:\r\n");
         } else {
-            $logs  = $this->reader->get();
+            $logs = $this->reader->get();
             $total = $logs->count();
 
-            $this->line('You have total ' . $total . ' log ' . (($total > 1) ? 'entries' : 'entry') . " as follow:\r\n");
+            $this->line('You have total '.$total.' log '.(($total > 1) ? 'entries' : 'entry')." as follow:\r\n");
         }
 
         return $logs;

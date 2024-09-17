@@ -36,14 +36,14 @@ class LogReaderDeleteCommand extends Command
     {
         $this->setLogReaderParam();
 
-        if (!empty($this->argument('id'))) {
+        if (! empty($this->argument('id'))) {
             $this->reader->find($this->argument('id'))->delete();
 
             $this->info('You deleted one entry successfully');
         } else {
             $deleted = $this->reader->delete();
 
-            $this->info('You deleted ' . $deleted . ' ' . (($deleted > 1) ? 'entries' : 'entry') . ' successfully');
+            $this->info('You deleted '.$deleted.' '.(($deleted > 1) ? 'entries' : 'entry').' successfully');
         }
     }
 

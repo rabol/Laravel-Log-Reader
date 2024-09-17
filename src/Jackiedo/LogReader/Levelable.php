@@ -7,7 +7,6 @@ use Jackiedo\LogReader\Contracts\Levelable as LevelableInterface;
 /**
  * The Levelable class.
  *
- * @package Jackiedo\LogReader
  *
  * @author Jackie Do <anhvudo@gmail.com>
  * @copyright 2017
@@ -43,9 +42,8 @@ class Levelable implements LevelableInterface
     /**
      * Filter logs by level.
      *
-     * @param string $level   Level need to check
-     * @param array  $allowed Strict levels to filter
-     *
+     * @param  string  $level  Level need to check
+     * @param  array  $allowed  Strict levels to filter
      * @return bool
      */
     public function filter($level, $allowed)

@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 /**
  * LogReaderServiceProvider.
  *
- * @package Jackiedo\LogReader
  *
  * @author Jackie Do <anhvudo@gmail.com>
  * @copyright 2017
@@ -31,8 +30,8 @@ class LogReaderServiceProvider extends ServiceProvider
         /**
          * Publishing package's config.
          */
-        $packageConfigPath = __DIR__ . '/../../config/config.php';
-        $appconfigPath     = config_path('log-reader.php');
+        $packageConfigPath = __DIR__.'/../../config/config.php';
+        $appconfigPath = config_path('log-reader.php');
 
         $this->mergeConfigFrom($packageConfigPath, 'log-reader');
 
